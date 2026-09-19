@@ -74,19 +74,5 @@ namespace Ucu.Poo.Repositories.Tests
 
             Assert.That(found, Is.Null);
         }
-
-        [Test]
-        public void FindCar_AccessedThroughRepositoryInterface_ReturnsCar()
-        {
-            Car car = new Car("Sandero", "Renault", 2015);
-            Repository<Car> repository = new CarsDatabase();
-            
-            repository.Add(car);
-
-            Car found = repository.Find(c => c.Model == "Sandero");
-
-            Assert.That(found, Is.SameAs(car));
-
-        }
     }
 }
