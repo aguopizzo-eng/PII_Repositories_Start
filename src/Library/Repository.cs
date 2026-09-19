@@ -4,14 +4,38 @@
 // </copyright>
 //------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 
 namespace Ucu.Poo.Repositories
 {
-  public interface Repository<T>
+  public class Repository<T>
   {
-    void Add(T obj);
-    void Remove(T obj);
-    T Find(Predicate<T> criteria);
+    private List<T> lst = new List<T>();
 
+    public void Add(T item)
+        {
+            if (item != null)
+            {
+                this.lst.Add(item);
+            }
+        }
+
+    public void Remove(T item)
+        {
+            this.lst.Remove(item);
+        }
+
+    public T Find(Predicate<T> criteria)
+        {
+            foreach (T item in this.lst)
+            {
+                if (criteria(item))
+                {
+                    return item;
+                }
+            }
+
+            return default(T);
+        }
   }
 }
